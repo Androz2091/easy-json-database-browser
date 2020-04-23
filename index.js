@@ -1,5 +1,5 @@
 module.exports = class EasyJsonDBBrowser {
-x
+
     constructor(){
         /**
          * The data stored in the database.
