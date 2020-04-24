@@ -47,6 +47,7 @@ module.exports = class EasyJsonDBBrowser {
      * @param {number} count 
      */
     add(key, count){
+        if(!this.data[key]) this.data[key] = 0;
         this.data[key] += count;
     }
 
@@ -56,6 +57,7 @@ module.exports = class EasyJsonDBBrowser {
      * @param {number} count 
      */
     subtract(key, count){
+        if(!this.data[key]) this.data[key] = 0;
         this.data[key] -= count;
     }
 
