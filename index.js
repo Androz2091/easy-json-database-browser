@@ -6,6 +6,25 @@ module.exports = class EasyJsonDBBrowser {
          * @type {object}
          */
         this.data = {};
+
+        this.fetchDataFromStorage();
+    }
+
+    /**
+     * Get data from the localStorage variable and store it in the data property.
+     */
+    fetchDataFromStorage(){
+        const savedData = localStorage.getItem('easyjsondatabase')
+        if(typeof savedData === "object"){
+            this.data = savedData;
+        }
+    }
+
+    /**
+     * Save data in the localStorage variable.
+     */
+    saveDataToStorage(){
+        localStorage.setItem('easyjsondatabase', this.data)
     }
 
     /**
@@ -31,6 +50,7 @@ module.exports = class EasyJsonDBBrowser {
      */
     set(key, value){
         this.data[key] = value;
+        this.saveDataToStorage();
     }
 
     /**
@@ -39,6 +59,7 @@ module.exports = class EasyJsonDBBrowser {
      */
     delete(key){
         delete this.data[key];
+        this.saveDataToStorage();
     }
 
     /**
@@ -49,6 +70,7 @@ module.exports = class EasyJsonDBBrowser {
     add(key, count){
         if(!this.data[key]) this.data[key] = 0;
         this.data[key] += count;
+        this.saveDataToStorage();
     }
 
     /**
@@ -59,6 +81,7 @@ module.exports = class EasyJsonDBBrowser {
     subtract(key, count){
         if(!this.data[key]) this.data[key] = 0;
         this.data[key] -= count;
+        this.saveDataToStorage();
     }
 
     /**
@@ -68,6 +91,15 @@ module.exports = class EasyJsonDBBrowser {
      */
     push(key, element){
         this.data[key].push(element);
+        this.saveDataToStorage();
+    }
+
+    /**
+     * Clear the database.
+     */
+    clear(){
+        this.data = {};
+        this.saveDataToStorage();
     }
 
 };
