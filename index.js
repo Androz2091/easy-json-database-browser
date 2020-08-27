@@ -14,9 +14,12 @@ module.exports = class EasyJsonDBBrowser {
      * Get data from the localStorage variable and store it in the data property.
      */
     fetchDataFromStorage(){
-        const savedData = localStorage.getItem('easyjsondatabase')
-        if(typeof savedData === "object"){
-            this.data = savedData;
+        const savedData = localStorage.getItem('easyjsondatabase');
+        if(savedData){
+            try {
+                const data = JSON.parse(savedData);
+                if (typeof data === 'object') this.data = data;
+            } catch (_e) {}
         }
     }
 
@@ -24,7 +27,7 @@ module.exports = class EasyJsonDBBrowser {
      * Save data in the localStorage variable.
      */
     saveDataToStorage(){
-        localStorage.setItem('easyjsondatabase', this.data)
+        localStorage.setItem('easyjsondatabase', JSON.stringify(this.data));
     }
 
     /**
