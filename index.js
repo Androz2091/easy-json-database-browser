@@ -32,6 +32,7 @@ module.exports = class EasyJsonDBBrowser {
      * @param {string} key 
      */
     get(key){
+        this.fetchDataFromStorage();
         return this.data[key];
     }
 
@@ -40,6 +41,7 @@ module.exports = class EasyJsonDBBrowser {
      * @param {string} key 
      */
     has(key){
+        this.fetchDataFromStorage();
         return Boolean(this.data[key]);
     }
     
